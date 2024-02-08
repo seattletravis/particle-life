@@ -28,7 +28,7 @@ class Particle:
         self.yellow = (255, 255, 0)
 
     # function to create
-    # one particle on the scree
+    # one particle on the screen
 
     def createParticle(self, x, y, color):
         pygame.draw.rect(self.screen, color, (x, y, 2, 2))
