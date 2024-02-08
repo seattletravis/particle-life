@@ -10,7 +10,7 @@ class Particle:
         pygame.init()
         self.width = width
         self.height = height
-        self.screen = pygame.display.set_mode((self.width, self.height))
+        self.screen = pygame.display.set_mode((self.width, self.height), pygame.RESIZABLE)
 
         pygame.display.set_caption("Particle Life")  # setting title
         self.screen.fill(color)
