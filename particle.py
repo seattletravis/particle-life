@@ -3,6 +3,7 @@ import pygame
 import random
 
 atoms=[]
+distance = 200
 window_width = 750
 window_height = 750
 pygame.init()
@@ -36,7 +37,7 @@ def rule(atoms1, atoms2, g):
             dx = a["x"] - b["x"]
             dy = a["y"] - b["y"]
             d = (dx*dx + dy*dy)**0.5
-            if( d > 0 and d < 80):
+            if( d > 0 and d < distance):
                 F = g/d
                 fx += F*dx
                 fy += F*dy
@@ -59,32 +60,32 @@ def rule(atoms1, atoms2, g):
         # elif(a["y"] >= window_height):
         #     a["y"] = 0
 
-yellow = create(100, "yellow")
-red = create(100, "red")
-blue = create(100, "blue")
-green = create(100, "green")
+yellow = create(150, "yellow")
+red = create(150, "red")
+blue = create(150, "blue")
+green = create(150, "green")
 
 run = True
 while run:
     window.fill(0)
-    rule(yellow, yellow, -0.2)
-    rule(red, red, -0.2)
-    rule(blue, blue, -0.2)
-    rule(green, green, -0.2)
+    rule(yellow, yellow, -0.15)
+    rule(red, red, -0.15)
+    rule(blue, blue, -0.15)
+    rule(green, green, -0.15)
 
-    rule(yellow, red, 0.1)
+    rule(yellow, red, 0.11)
     rule(yellow, blue, 0.1)
     rule(yellow, green, 0.1)
 
     rule(red, yellow, -0.1)
-    rule(red, blue, 0.1)
+    rule(red, blue, 0.11)
     rule(red, green, 0.1)
 
     rule(blue, red, -0.1)
     rule(blue, yellow, 0.1)
-    rule(blue, green, 0.1)
+    rule(blue, green, 0.11)
 
-    rule(green, blue, -0.2)
+    rule(green, blue, -0.1)
     rule(green, yellow, 0.1)
     rule(green, red, 0.1)
 
