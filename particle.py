@@ -3,8 +3,8 @@ import pygame
 import random
 
 atoms=[]
-window_width = 1920
-window_height = 1080
+window_width = 750
+window_height = 750
 pygame.init()
 window = pygame.display.set_mode((window_width, window_height), pygame.RESIZABLE)
 
@@ -44,23 +44,69 @@ def rule(atoms1, atoms2, g):
         a["vy"] = (a["vy"] + fy)*0.5
         a["x"] += a["vx"]
         a["y"] += a["vy"]
+        # Bounce Off Wall Logic
         if(a["x"] <= 0 or a["x"] >= window_width):
-            a["vx"] *=-1
+            a["vx"] *=-2
         if(a["y"] <= 0 or a["y"] >= window_height):
-            a["vy"] *=-1        
-
+            a["vy"] *=-2 
+        # Pass Through Wall Logic      
+        # if(a["x"] <= 0):
+        #     a["x"] = window_width
+        # elif(a["x"] >= window_width):
+        #     a["x"] = 0
+        # if(a["y"] <= 0):
+        #     a["y"] = window_height
+        # elif(a["y"] >= window_height):
+        #     a["y"] = 0
 
 yellow = create(100, "yellow")
 red = create(100, "red")
+blue = create(100, "blue")
+green = create(100, "green")
 
 run = True
 while run:
     window.fill(0)
-    rule(red, red, 0.1)
-    rule(red, yellow, -0.15)
-    rule(yellow, yellow, -0.1)
+    rule(yellow, yellow, -0.2)
+    rule(red, red, -0.2)
+    rule(blue, blue, -0.2)
+    rule(green, green, -0.2)
+
+    rule(yellow, red, 0.1)
+    rule(yellow, blue, 0.1)
+    rule(yellow, green, 0.1)
+
+    rule(red, yellow, -0.1)
+    rule(red, blue, 0.1)
+    rule(red, green, 0.1)
+
+    rule(blue, red, -0.1)
+    rule(blue, yellow, 0.1)
+    rule(blue, green, 0.1)
+
+    rule(green, blue, -0.2)
+    rule(green, yellow, 0.1)
+    rule(green, red, 0.1)
+
+    # rule(red, yellow, 0.1)
+    # rule(blue, yellow, 0.1)
+    # rule(green, yellow, 0.1)
+
+    # rule(yellow, red, -0.1)
+    # rule(blue, red, 0.1)
+    # rule(green, red, 0.1)
+
+    # rule(red, blue, -0.1)
+    # rule(yellow, blue, 0.1)
+    # rule(green, blue, 0.1)
+
+    # rule(blue, green, -0.1)
+    # rule(yellow, green, 0.1)
+    # rule(red, green, 0.1)
+
+
     for i in range(len(atoms)):
-        draw(window,  atoms[i]["x"], atoms[i]["y"], atoms[i]["color"], 3)
+        draw(window,  atoms[i]["x"], atoms[i]["y"], atoms[i]["color"], 2)
         
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
